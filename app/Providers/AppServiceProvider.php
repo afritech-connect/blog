@@ -25,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
         Gate::before(function (User $user, string $ability) {
             return $user->isSuperAdmin() ? true: null;
         });
+
+        Gate::define('use-translation-manager', function (?User $user) {
+            // Your authorization logic
+            return $user !== null && $user->hasRole('admin');
+        });
     }
 
     
